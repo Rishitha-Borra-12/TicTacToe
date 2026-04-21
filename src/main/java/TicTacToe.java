@@ -1,53 +1,17 @@
-import java.util.Random;
+import java.util.Scanner;
 
 public class TicTacToe {
     public static void main(String[] args) {
-        char[][] board = new char[3][3];
-        initializeBoard(board);
-        printBoard(board);
+        Scanner scanner = new Scanner(System.in);
 
-        Random random = new Random();
+        int slot = getUserSlot(scanner);
 
-        String humanPlayer = "Human";
-        String computerPlayer = "Computer";
-
-        char humanSymbol;
-        char computerSymbol;
-        String currentPlayer;
-
-        boolean humanStarts = random.nextBoolean();
-
-        if (humanStarts) {
-            humanSymbol = 'X';
-            computerSymbol = 'O';
-            currentPlayer = humanPlayer;
-        } else {
-            humanSymbol = 'O';
-            computerSymbol = 'X';
-            currentPlayer = computerPlayer;
-        }
-
-        System.out.println("\nToss Result:");
-        System.out.println("Human Symbol: " + humanSymbol);
-        System.out.println("Computer Symbol: " + computerSymbol);
-        System.out.println("First Turn: " + currentPlayer);
+        System.out.println("You selected slot: " + slot);
     }
 
-    public static void initializeBoard(char[][] board) {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = '-';
-            }
-        }
-    }
-
-    public static void printBoard(char[][] board) {
-        System.out.println("Empty Tic-Tac-Toe Board:");
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
-        }
+    public static int getUserSlot(Scanner scanner) {
+        System.out.print("Enter a slot number (1-9): ");
+        int slot = scanner.nextInt();
+        return slot;
     }
 }
