@@ -1,31 +1,32 @@
+import java.util.Scanner;
+
 public class TicTacToe {
-
     public static void main(String[] args) {
-        char[][] board = {
-                {'X', '-', '-'},
-                {'-', 'O', '-'},
-                {'-', '-', '-'}
-        };
+        Scanner scanner = new Scanner(System.in);
 
-        int row = 1;
-        int col = 0;
+        int slot = getUserSlot(scanner);
+        int[] indexes = convertSlotToIndex(slot);
 
-        if (isValidMove(board, row, col)) {
-            System.out.println("Valid move");
-        } else {
-            System.out.println("Invalid move");
-        }
+        System.out.println("Slot: " + slot);
+        System.out.println("Row: " + indexes[0]);
+        System.out.println("Column: " + indexes[1]);
     }
 
-    public static boolean isValidMove(char[][] board, int row, int col) {
-        if (row < 0 || row > 2 || col < 0 || col > 2) {
-            return false;
-        }
+    public static int getUserSlot(Scanner scanner) {
+        int slot;
+        do {
+            System.out.print("Enter a slot number (1-9): ");
+            slot = scanner.nextInt();
+        } while (slot < 1 || slot > 9);
 
-        if (board[row][col] != '-') {
-            return false;
-        }
+        return slot;
+    }
 
-        return true;
+    public static int[] convertSlotToIndex(int slot) {
+        int position = slot - 1;
+        int row = position / 3;
+        int col = position % 3;
+
+        return new int[]{row, col};
     }
 }
