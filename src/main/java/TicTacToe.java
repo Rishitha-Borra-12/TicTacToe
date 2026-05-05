@@ -1,54 +1,19 @@
-import java.util.Random;
-
 public class TicTacToe {
 
-    static char[][] board = {
-        {'-', '-', '-'},
-        {'-', '-', '-'},
-        {'-', '-', '-'}
-    };
-
-    static boolean isHumanTurn = true;
-    static boolean gameOver = false;
+    static char[][] board = new char[3][3];
 
     public static void main(String[] args) {
+        board[0][0] = 'X';
+        board[0][1] = 'X';
+        board[0][2] = 'X';
 
-        while (!gameOver) {
-
-            if (isHumanTurn) {
-                humanMove();
-            } else {
-                computerMove();
-            }
-
-            printBoard();
-
-            if (checkWin() || checkDraw()) {
-                gameOver = true;
-            } else {
-                isHumanTurn = !isHumanTurn;
-            }
-        }
+        System.out.println(hasWon('X'));
     }
 
-    static void humanMove() {
+    static boolean hasWon(char symbol) {
+
         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (board[i][j] == '-') {
-                    board[i][j] = 'X';
-                    return;
-                }
-            }
-        }
-    }
+            if (board[i][0] == symbol && board[i][1] == symbol && board[i][2] == symbol)
+                return true;
 
-    static void computerMove() {
-        Random rand = new Random();
-        int row, col;
-
-        while (true) {
-            int slot = rand.nextInt(9) + 1;
-            row = (slot - 1) / 3;
-            col = (slot - 1) % 3;
-
-            if
+            if (board[0][i
