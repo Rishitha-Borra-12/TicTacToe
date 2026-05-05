@@ -8,11 +8,38 @@ public class TicTacToe {
         {'-', '-', '-'}
     };
 
-    static char computerSymbol = 'O';
+    static boolean isHumanTurn = true;
+    static boolean gameOver = false;
 
     public static void main(String[] args) {
-        computerMove();
-        printBoard();
+
+        while (!gameOver) {
+
+            if (isHumanTurn) {
+                humanMove();
+            } else {
+                computerMove();
+            }
+
+            printBoard();
+
+            if (checkWin() || checkDraw()) {
+                gameOver = true;
+            } else {
+                isHumanTurn = !isHumanTurn;
+            }
+        }
+    }
+
+    static void humanMove() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == '-') {
+                    board[i][j] = 'X';
+                    return;
+                }
+            }
+        }
     }
 
     static void computerMove() {
@@ -21,17 +48,7 @@ public class TicTacToe {
 
         while (true) {
             int slot = rand.nextInt(9) + 1;
-
             row = (slot - 1) / 3;
             col = (slot - 1) % 3;
 
-            if (board[row][col] == '-') {
-                board[row][col] = computerSymbol;
-                break;
-            }
-        }
-    }
-
-    static void printBoard() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+            if
